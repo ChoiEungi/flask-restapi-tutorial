@@ -1,13 +1,15 @@
 from flask import Flask
-
+from flask_restful import  Resource, Api
 
 app = Flask(__name__)
+api = Api(app)
+
+class HelloWorld(Resource):
+    def get(self):
+        return {'hello': 'world'}
 
 
-@app.route('/')
-def hello_world():
-    return 'Hello World!'
-
+api.add_resource(HelloWorld, '/')  # set routing
 
 if __name__ == '__main__':
-    app.run()
+    app.run(debug=True)
